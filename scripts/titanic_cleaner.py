@@ -42,17 +42,19 @@ class TitanicDataPipeline:
        print(self.df.isnull().sum())
        self.df.info()
 
-
-    def save_file(self,output_path):
-       self.df.to_csv(output_path , index = False)# index = false remove the index 
-       print(f"Cleaned data save to {output_path}")
-
     def encode_data(self):
        #one hot encoding for embarked
         self.df = pd.get_dummies(self.df,columns=['Embarked'],drop_first=True)  
         #drop_first drom one column so by other two can represent it like If Embarked_Q=0 and Embarked_S=0 → it must be C     
        #binary encoding for sex 
         self.df['Sex'] = self.df['Sex'].map({'male':0,'female':1})
+
+
+    def save_file(self,output_path):
+       self.df.to_csv(output_path , index = False)# index = false remove the index 
+       print(f"Cleaned data save to {output_path}")
+
+   
 
 # --- THE 'MAIN' BLOCK ---
 if __name__ == "__main__":

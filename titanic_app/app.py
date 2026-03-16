@@ -44,8 +44,13 @@ if st.button("Predict Survival"):
     prediction = model.predict(input_data)
     probability = model.predict_proba(input_data)[0][1]
     #get the probability of died and survived  probs of a one passanger,so from that get the survided prob [[0.18, 0.82]] then by calling this only gives second number"""
+    st.progress(probability)
 
     if prediction[0] == 1:
         st.success(f"Survived ! (Probability:{probability:.2%})")
     else:
         st.error(f"Perished. (Probability:{1-probability:.2%})")
+    if probability> 0.5:
+        st.write("The model is leaning towards survival.")
+    else:
+        st.write("The model is leaning towards fatality.")

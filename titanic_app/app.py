@@ -1,13 +1,40 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import base64
 from pathlib import Path
 
 
 #load the saved pipeline
 
-MODEL_PATH = Path(__file__).resolve().parent / 'models' / 'titanic_rf_model.pkl'
+MODEL_PATH = Path(__file__).resolve().parent / 'models' / 'titanic_rf_model.pkl'#ensures your app doesn't crash when you move it from local computer to a cloud server
 model = joblib.load(MODEL_PATH)
+
+
+def set_transparent_background(image_path: Path, opacity: float = 0.12) -> None:
+    if not image_path.exists():
+        return
+
+    encoded = base64.b64encode(image_path.read_bytes()).decode("utf-8")
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image:
+                linear-gradient(rgba(255, 255, 255, {1 - opacity}), rgba(255, 255, 255, {1 - opacity})),
+                url('data:image/png;base64,{encoded}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+BG_IMAGE_PATH = Path(__file__).resolve().parent / "assets" / "image.png"
+set_transparent_background(BG_IMAGE_PATH, opacity=0.10)
 
 #set up the UI
 st.title("Titanic Survival Predictor")

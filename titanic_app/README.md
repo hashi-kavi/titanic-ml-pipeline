@@ -1,42 +1,92 @@
-# Titanic Survival Predictor App
+# 🚢 Titanic Survival Predictor (Machine Learning Web App)
 
-This folder contains a Streamlit application that predicts whether a passenger on the Titanic would have survived. The app uses a pre-trained Random Forest model and turns a few passenger details into a real-time prediction with confidence.
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![ML](https://img.shields.io/badge/Machine%20Learning-Random%20Forest-green)
+
+## Live Demo
+
+Try the app here:
+https://titanic-ml-pipeline-rgn69hxdfjclsjyulfyhkh.streamlit.app/
+
+---
 
 ## Overview
 
-The app is designed as a lightweight inference interface for the Titanic machine learning project. It loads the saved model, accepts passenger inputs from the browser, engineers the required features, and returns a survival prediction instantly.
+This project is a **Streamlit-based machine learning web application** that predicts whether a passenger on the Titanic would have survived.
+
+It uses a **pre-trained Random Forest model** and transforms user inputs into real-time predictions with confidence scores.
+
+---
+
+## Screenshot
+
+![Titanic Survival Predictor App](./assets/screenshot.png)
+
+---
 
 ## Features
 
-- Interactive Streamlit interface for passenger inputs
-- Pre-trained Random Forest model for local prediction
-- Automatic feature engineering before inference
-- Probability-based output for clearer interpretation
-- Model loading based on the app file location, not the terminal location
+* Real-time ML predictions through an interactive UI
+* Automated feature engineering pipeline
+* Probability-based predictions for better interpretability
+* Lightweight and fast local inference
+* Model loading independent of terminal location
 
-## Folder Contents
+---
 
-- `app.py` - Streamlit application code
-- `models/titanic_rf_model.pkl` - Serialized trained model
-- `README.md` - Documentation for this app
+## How It Works (Pipeline)
+
+1. User inputs passenger details via Streamlit UI
+2. App performs feature engineering
+3. Pre-trained Random Forest model is loaded
+4. Model predicts survival probability
+5. Result is displayed with confidence score
+
+---
+
+## Model Details
+
+* Algorithm: Random Forest Classifier
+* Trained on: Titanic dataset
+* Features: Engineered from raw passenger data
+* Output: Binary classification with probability
+
+---
+
+## Purpose
+
+This project demonstrates:
+
+* End-to-end ML deployment
+* Feature engineering for real-world data
+* Model inference in a web application
+* Clean and user-friendly UI design
+
+---
 
 ## Tech Stack
 
-- Python
-- Streamlit
-- pandas
-- joblib
-- scikit-learn
+* Python
+* Streamlit
+* pandas
+* numpy
+* joblib
+* scikit-learn
+
+---
 
 ## Requirements
 
-Use Python 3.x and install the following packages:
+Use Python 3.8+ and install the following packages:
 
-- streamlit
-- pandas
-- numpy
-- joblib
-- scikit-learn
+* streamlit
+* pandas
+* numpy
+* joblib
+* scikit-learn
+
+---
 
 ## Setup
 
@@ -60,9 +110,9 @@ python -m venv .venv
 pip install streamlit pandas numpy joblib scikit-learn
 ```
 
-## Run The App
+---
 
-You can run the app either from this folder or from the project root.
+## Run The App
 
 From inside `titanic_app`:
 
@@ -76,7 +126,9 @@ From the project root:
 streamlit run titanic_app/app.py
 ```
 
-After launch, Streamlit will provide a local URL, usually `http://localhost:8501`.
+After launch, Streamlit will provide a local URL (usually http://localhost:8501).
+
+---
 
 ## How The Prediction Works
 
@@ -91,46 +143,54 @@ The model expects these features:
 7. `Embarked_Q`
 8. `Embarked_S`
 
-The app derives some values automatically before sending them to the model:
+### Feature Engineering Logic
 
-- `Sex`: male = 0, female = 1
-- `FamilySize`: `SibSp + Parch + 1`
-- `IsAlone`: `1` if `FamilySize == 1`, otherwise `0`
-- `Embarked_Q`: `1` if the embarkation port is `Q`, otherwise `0`
-- `Embarked_S`: `1` if the embarkation port is `S`, otherwise `0`
+* `Sex`: male = 0, female = 1
+* `FamilySize`: `SibSp + Parch + 1`
+* `IsAlone`: `1` if `FamilySize == 1`, otherwise `0`
+* `Embarked_Q`: `1` if port = Q
+* `Embarked_S`: `1` if port = S
 
-If both `Embarked_Q` and `Embarked_S` are `0`, the passenger is treated as having embarked from `C`.
+If both `Embarked_Q` and `Embarked_S` are `0`, the passenger is treated as embarking from `C`.
+
+---
 
 ## Output
 
-- If the model predicts `1`, the app displays `Survived` with survival probability.
-- If the model predicts `0`, the app displays `Perished` with the corresponding probability.
+* `1` → **Survived** (with probability)
+* `0` → **Perished** (with probability)
 
-## Example Use
+---
 
-Enter passenger details such as class, sex, age, fare, family counts, and embarkation port, then click `Predict Survival`. The app returns both the predicted outcome and the model confidence.
+## Folder Structure
 
-## Screenshot
-
-To show the app UI on GitHub, save a screenshot image in this location:
-
-```text
+```
 titanic_app/
-  assets/
-    titanic-app-screenshot.png
+│── app.py
+│── models/
+│   └── titanic_rf_model.pkl
+│── assets/
+│   └── image.png
+│── README.md
 ```
 
-After you add the image file, GitHub will render it automatically using the line below:
-
-![Titanic Survival Predictor App](./assets/titanic-app-screenshot.png)
-
-If you use a different file name, update the path in the Markdown image link.
+---
 
 ## Troubleshooting
 
-- Model file not found:
-  - Confirm `models/titanic_rf_model.pkl` exists.
-- Missing package error:
-  - Activate the virtual environment and reinstall dependencies.
-- Streamlit command not recognized:
-  - Run `pip install streamlit` inside the active environment.
+* Model file not found:
+  Ensure `models/titanic_rf_model.pkl` exists
+
+* Missing packages:
+  Activate virtual environment and reinstall dependencies
+
+* Streamlit not recognized:
+  Run `pip install streamlit`
+
+---
+
+## Note
+
+The virtual environment (`.venv`) is excluded using `.gitignore`.
+
+---

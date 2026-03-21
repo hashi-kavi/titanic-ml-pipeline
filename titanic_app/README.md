@@ -21,7 +21,7 @@ It uses a **pre-trained Random Forest model** and transforms user inputs into re
 
 ## Screenshot
 
-![Titanic Survival Predictor App](./assets/image.png)
+![Titanic Survival Predictor App](./assets/screenshot.png)
 
 ---
 

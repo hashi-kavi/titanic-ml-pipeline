@@ -170,7 +170,7 @@ titanic_app/
 │── models/
 │   └── titanic_rf_model.pkl
 │── assets/
-│   └── image.png
+│   └── screenshot.png
 │── README.md
 ```
 
